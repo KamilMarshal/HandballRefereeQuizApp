@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "HandballRefereeQuizApp",
+    "slug": "handball-referee-quiz-app",
     "version": "1.0.0",
+    "githubUrl": "https://github.com/KamilMarshal/HandballRefereeQuizApp",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -14,7 +15,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#808080"
       }
     },
     "web": {
