@@ -1,8 +1,17 @@
 import {Button, Text, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
-import {Link, Redirect, router} from "expo-router";
+import {Link, Redirect, router, useFocusEffect} from "expo-router";
+import {useEffect} from "react";
+import {checkAuth} from "@/api/auth";
 
 export default function Index() {
+    useFocusEffect(() => {
+    const verifyUser = async () => {
+      const authStatus = await checkAuth();
+      if (authStatus) router.replace('/home')
+    };
+    verifyUser();
+  });
   return (
       <SafeAreaView className="h-full">
           <View className="w-full justify-center items-center align-middle">

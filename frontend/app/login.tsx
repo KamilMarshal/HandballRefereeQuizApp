@@ -16,15 +16,18 @@ export default function Login() {
     verifyUser();
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn)
+      setTimeout(() => {
+        router.replace('/home')
+      }, 500)
+  }, [isLoggedIn]);
+
   const handleLogin = async (user: string, pass: string) => {
     console.log(username, password)
     const success = await login(user, pass);
     console.log("(frontend) handleLogin: success =",success)
     setIsLoggedIn(success);
-    setTimeout(() => {
-      // Przejście do ekranu /home po 1 sekundzie
-      router.push('/home');
-    }, 1000);
   };
 
   const handleLogout = async () => {
@@ -35,7 +38,9 @@ export default function Login() {
   return (
     <View>
       {isLoggedIn ? (
-          <Text className="p-4">Udało się zalogować!</Text>
+          <>
+            <Text className="p-4">Udało się zalogować!</Text>
+          </>
       ) : (
         <>
           <Text>🔑 Zaloguj się</Text>
