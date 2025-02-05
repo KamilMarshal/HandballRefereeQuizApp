@@ -36,8 +36,8 @@ const User = sequelize.define(
     },
   },
   {
-    tableName: "users", // Ustawiamy nazwę tabeli ręcznie
-    timestamps: false, // Wyłączamy automatyczne kolumny `createdAt` i `updatedAt`
+    tableName: "users",
+    timestamps: false,
   }
 );
 
