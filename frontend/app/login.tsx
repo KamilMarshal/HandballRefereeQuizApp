@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button } from "react-native";
-import { checkAuth, login } from "@/api/auth";
-import {router} from "expo-router";
+import {View, Text, Button, TextInput} from "react-native";
+import {checkAuth, login, logout} from "@/api/auth";
+import {Redirect, router} from "expo-router";
 
 export default function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('KamilM');
+  const [password, setPassword] = useState('qwerty');
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -14,24 +16,48 @@ export default function Login() {
     verifyUser();
   }, []);
 
-  const handleLogin = async () => {
-    const success = await login("KamilM", "qwerty");
+  const handleLogin = async (user: string, pass: string) => {
+    console.log(username, password)
+    const success = await login(user, pass);
     console.log("(frontend) handleLogin: success =",success)
     setIsLoggedIn(success);
+    setTimeout(() => {
+      // Przejście do ekranu /home po 1 sekundzie
+      router.push('/home');
+    }, 1000);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    router.replace('/');
   };
 
   return (
     <View>
-      {isLoggedIn ? (<>
-          <Text>Udało się zalogować!</Text>
-        <Button title="Login" onPress={() => {
-                  router.push('/home')
-              }}/>
-          </>
+      {isLoggedIn ? (
+          <Text className="p-4">Udało się zalogować!</Text>
       ) : (
         <>
           <Text>🔑 Zaloguj się</Text>
-          <Button title="Login" onPress={handleLogin} />
+
+          <Text>Username:</Text>
+          <TextInput
+              value={username}
+              onChangeText={setUsername}
+              placeholder="Enter username"
+              defaultValue="KamilM"
+          />
+          <Text>Password:</Text>
+          <TextInput
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Enter password"
+              secureTextEntry
+              defaultValue="qwerty"
+          />
+
+          <Button title="cons" onPress={() => console.log(username, password)} />
+          <Button title="Login" onPress={() => handleLogin(username, password)} />
         </>
       )}
     </View>

@@ -8,7 +8,6 @@ export const login = async (username, password) => {
   try {
     console.log("(front api)  username:",username,"Pass",password)
     const res = await axios.post(`${API_URL}/login`, { username: username, password: password });
-    console.log("(front api) res.req:", res)
     console.log("(front api) res.data:" , res.data)
 
     await AsyncStorage.setItem("token", res.data.token);
@@ -30,4 +29,9 @@ export const checkAuth = async () => {
   } catch (err) {
     return false;
   }
+};
+
+// 🚪 Wylogowanie
+export const logout = async () => {
+  await AsyncStorage.removeItem("token");
 };

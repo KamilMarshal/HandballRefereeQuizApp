@@ -26,7 +26,7 @@ export default function RootLayout() {
   }
 
 
-  return <Stack screenOptions={{headerShown: false}}>
+  return <Stack screenOptions={{headerShown: false, animationTypeForReplace: 'pop'}}>
     <Stack.Screen name="index"/>
     <Stack.Screen name="login"/>
   </Stack>

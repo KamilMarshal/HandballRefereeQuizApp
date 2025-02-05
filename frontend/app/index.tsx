@@ -7,8 +7,8 @@ export default function Index() {
       <SafeAreaView className="h-full">
           <View className="w-full justify-center items-center align-middle">
               <Text className="text-base mt-5">Handball Referee Quiz App!</Text>
-              <Text className="text-base my-5">Index.jsx</Text>
-              <Button title="Login" onPress={() => {
+              <Text className="text-base my-5">Pierwsze okno</Text>
+              <Button title="Zaloguj się" onPress={() => {
                   router.push('/login')
               }}/>
           </View>
