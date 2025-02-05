@@ -1,13 +1,39 @@
-import { Text, View } from "react-native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import {Redirect} from "expo-router";
+import React, { useEffect, useState } from "react";
+import { View, Text, Button } from "react-native";
+import { checkAuth, login } from "@/api/auth";
+import {router} from "expo-router";
 
 export default function Login() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      const authStatus = await checkAuth();
+      setIsLoggedIn(authStatus);
+    };
+    verifyUser();
+  }, []);
+
+  const handleLogin = async () => {
+    const success = await login("KamilM", "qwerty");
+    console.log("(frontend) handleLogin: success =",success)
+    setIsLoggedIn(success);
+  };
+
   return (
-      <SafeAreaView className="h-full">
-          <View className="w-full justify-center items-center align-middle">
-              <Text className="text-base">Login.jsx</Text>
-          </View>
-      </SafeAreaView>
+    <View>
+      {isLoggedIn ? (<>
+          <Text>Udało się zalogować!</Text>
+        <Button title="Login" onPress={() => {
+                  router.push('/home')
+              }}/>
+          </>
+      ) : (
+        <>
+          <Text>🔑 Zaloguj się</Text>
+          <Button title="Login" onPress={handleLogin} />
+        </>
+      )}
+    </View>
   );
-}
+};
