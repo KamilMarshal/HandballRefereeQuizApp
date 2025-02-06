@@ -5,10 +5,11 @@ const QuestionTranslation = require('./question_translations');
 const CorrectAnswer = require('./correct_answers');
 
 
-Question.hasMany(QuestionTranslation)
-QuestionTranslation.belongsTo(Question, {foreignKey: 'question_id'})
+Question.hasMany(QuestionTranslation, { foreignKey: 'question_id'});
+QuestionTranslation.belongsTo(Question, { foreignKey: 'question_id'});
 
-Question.hasMany(CorrectAnswer)
+
+Question.hasMany(CorrectAnswer, { foreignKey: 'question_id' })
 CorrectAnswer.belongsTo(Question, {foreignKey: 'question_id'})
 
 module.exports = {User, Question, QuestionTranslation, CorrectAnswer, sequelize};

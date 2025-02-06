@@ -3,6 +3,9 @@ const express = require("express");
 const cors = require("cors");
 const sequelize = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const quizRoutes = require("./routes/quizRoutes");
+const ruleRoutes = require("./routes/ruleRoutes");
+const os = require("os");
 
 const app = express();
 
@@ -12,6 +15,8 @@ app.use(cors());
 
 // Podpinamy nasze trasy
 app.use("/api/auth", authRoutes);
+app.use("/api/quiz", quizRoutes);
+app.use("/api/rule", ruleRoutes);
 
 // Synchronizacja bazy danych
 sequelize.sync().then(() => {
