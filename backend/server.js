@@ -23,5 +23,17 @@ sequelize.sync().then(() => {
   console.log("✅ Połączono z bazą PostgreSQL");
 });
 
+const getLocalIP = () => {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const net of interfaces[name]) {
+      if (net.family === "IPv4" && !net.internal) {
+        return net.address;
+      }
+    }
+  }
+  return "127.0.0.1";
+};
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Serwer działa na http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Serwer działa na http://${getLocalIP()}:${PORT}`));
