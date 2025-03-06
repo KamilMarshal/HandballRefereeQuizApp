@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const API_URL = "http://192.168.0.202:5000/api/auth";
+// const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "http://10.55.14.122:5000/api/auth";
 
 // 🔐 Logowanie
 export const login = async (username, password) => {
@@ -35,3 +36,15 @@ export const checkAuth = async () => {
 export const logout = async () => {
   await AsyncStorage.removeItem("token");
 };
+
+export const getUsername = async () => {
+  const token = await AsyncStorage.getItem("token");
+  const payload = JSON.parse(atob(token.split(".")[1]));
+  return payload.username;
+}
+
+export const getLeagueLevel = async () => {
+  const token = await AsyncStorage.getItem("token");
+  const payload = JSON.parse(atob(token.split(".")[1]));
+  return payload.league_level;
+}
