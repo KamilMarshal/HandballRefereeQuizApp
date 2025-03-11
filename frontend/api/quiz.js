@@ -1,8 +1,7 @@
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// const API_URL = "http://localhost:5000/api/quiz";
-const API_URL = "http://10.55.14.122:5000/api/quiz";
+const API_URL = "http://192.168.0.201:5000/api/quiz";
+// const API_URL = "http://10.55.15.27:5000/api/quiz";
 
 export const getRandomQuestion = async (lang = "pl") => {
   try {

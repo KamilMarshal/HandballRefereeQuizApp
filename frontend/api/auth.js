@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000/api/auth";
-const API_URL = "http://10.55.14.122:5000/api/auth";
+const API_URL = "http://192.168.0.201:5000/api/auth";
+// const API_URL = "http://10.55.15.27:5000/api/auth";
 
 // 🔐 Logowanie
 export const login = async (username, password) => {
